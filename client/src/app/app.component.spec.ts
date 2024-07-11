@@ -1,5 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { appConfig } from './app.config';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
