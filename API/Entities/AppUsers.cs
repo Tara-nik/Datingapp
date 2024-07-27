@@ -7,8 +7,9 @@ namespace API.Entities
 {
     public class AppUser
     {
-        public int ID {get; set; }
-        public string UserNames { get; set; }
-
+        public int ID { get; set; }
+        public required string UserNames { get; set; }
+        public required byte[] PassworrdHash { get; set; }
+        public required byte[] PassworrdSalt { get; set; }
     }
 }

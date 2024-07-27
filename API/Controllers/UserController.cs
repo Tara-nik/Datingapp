@@ -5,23 +5,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")] // /api/users
-    [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
-    public class UserController: ControllerBase
+    public class UserController: BaseApiController
     {
         private readonly DataContext _context;
         public UserController(DataContext context)
         {
             _context = context;
         }
+        
         [HttpGet]
+        [AllowAnonymous]
         public async Task <ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
             var users = await _context.Users.ToListAsync();
@@ -29,6 +29,8 @@ namespace API.Controllers
         
         }
         [HttpGet("{id}")] // /api/user/2
+        [Authorize]
+
         public async Task <ActionResult<AppUser>> GetUser(int id)
         {
             return await _context.Users.FindAsync(id);
