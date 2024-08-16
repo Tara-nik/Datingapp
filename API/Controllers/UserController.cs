@@ -12,28 +12,25 @@ using SQLitePCL;
 
 namespace API.Controllers
 {
-    public class UserController: BaseApiController
+    public class UserController(DataContext context) : BaseApiController
     {
-        private readonly DataContext _context;
-        public UserController(DataContext context)
-        {
-            _context = context;
-        }
-        
-        [HttpGet]
+        //private readonly DataContext _context = context;
+
         [AllowAnonymous]
+        [HttpGet]
         public async Task <ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
-            var users = await _context.Users.ToListAsync();
+            var users = await context.Users.ToListAsync();
             return users;
         
         }
-        [HttpGet("{id}")] // /api/user/2
         [Authorize]
+        [HttpGet("{id}")] // /api/user/2
+        
 
         public async Task <ActionResult<AppUser>> GetUser(int id)
         {
-            return await _context.Users.FindAsync(id);
+            return await context.Users.FindAsync(id);
         }
 
         private string GetDebuggerDisplay()
