@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterComponent } from '../register/register.component';
 import { HttpClient } from '@angular/common/http';
-import { inject } from '@angular/core';  // اضافه کردن import
+import { inject } from '@angular/core';  
 
 @Component({
   selector: 'app-home',
